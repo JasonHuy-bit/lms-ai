@@ -108,7 +108,7 @@ export function ModuleAccordion({ modules, userId }: ModuleAccordionProps) {
                 <div className="ml-4 border-l-2 border-zinc-800 pl-3 space-y-1">
                   {module.lessons?.map((lesson, lessonIndex) => {
                     const completed = isLessonCompleted(lesson);
-                    const hasVideo = !!lesson.video?.asset?.playbackId;
+                    const hasVideo = !!(lesson.video as any)?.asset?.playbackId;
 
                     return (
                       <Link
