@@ -9,11 +9,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Progress } from "@/components/ui/progress";
-import type { COURSE_WITH_MODULES_QUERYResult } from "@/sanity.types";
+import type { COURSE_WITH_MODULES_QUERY_RESULT } from "@/sanity.types";
 
 // Infer types from Sanity query result
 type Module = NonNullable<
-  NonNullable<COURSE_WITH_MODULES_QUERYResult>["modules"]
+  NonNullable<COURSE_WITH_MODULES_QUERY_RESULT>["modules"]
 >[number];
 type Lesson = NonNullable<Module["lessons"]>[number];
 
@@ -106,9 +106,9 @@ export function ModuleAccordion({ modules, userId }: ModuleAccordionProps) {
 
               <AccordionContent className="px-5 pb-4 pt-2">
                 <div className="ml-4 border-l-2 border-zinc-800 pl-3 space-y-1">
-                  {module.lessons?.map((lesson, lessonIndex) => {
+                  {module.lessons?.map((lesson: Lesson, lessonIndex: number) => {
                     const completed = isLessonCompleted(lesson);
-                    const hasVideo = !!(lesson.video as any)?.asset?.playbackId;
+                    const hasVideo = !!lesson.video?.asset?.playbackId;
 
                     return (
                       <Link
