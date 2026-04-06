@@ -1,11 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  typescript: {
-    ignoreBuildErrors: true, 
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+        // Bạn có thể thêm pathname: '/images/**' để cụ thể hơn
+      },
+    ],
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  // Giữ nguyên các phần ignore lỗi build trước đó
+  typescript: { ignoreBuildErrors: true },
+  eslint: { ignoreDuringBuilds: true },
 };
 
 export default nextConfig;
